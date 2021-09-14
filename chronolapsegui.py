@@ -28,21 +28,21 @@ class ProgressPanel(wx.Panel):
         dc.SetBrush(wx.Brush(wx.Colour(0,0,255,220)))
 
         # build rect
-        width,height = self.GetSizeTuple()
+        width,height = self.GetSize()
         size = max(2, (width-10)*self.progress)
         rect = wx.Rect(5,8, size ,5)
 
         # draw rect
         dc.Clear()
-        dc.DrawRoundedRectangleRect(rect, 2)
+        dc.DrawRoundedRectangle(rect, 2)
 
     def OnPaint(self, evt):
         # this doesnt appear to work at all...
 
-        width,height = self.GetSizeTuple()
+        width,height = self.GetSize()
 
         # get drawing shit
-        dc = wx.PaintDC(self)
+        dc = wx.DC(self)
 
         dc.SetPen(wx.Pen(wx.Colour(0,0,255,255)))
         dc.SetBrush(wx.Brush(wx.Colour(0,0,255,220)))
@@ -54,7 +54,7 @@ class ProgressPanel(wx.Panel):
         # draw rect
         dc.Clear()
         dc.BeginDrawing()
-        dc.DrawRoundedRectangleRect(rect, 2)
+        dc.DrawRoundedRectangle(rect, 2)
         dc.EndDrawing()
 # end wxGlade
 
@@ -69,11 +69,11 @@ class chronoFrame(wx.Frame):
         self.chronoframe_menubar = wx.MenuBar()
         self.file = wx.Menu()
         self.exitmenuitem = wx.MenuItem(self.file, wx.ID_EXIT, _("Exit Chronolapse"), "", wx.ITEM_NORMAL)
-        self.file.AppendItem(self.exitmenuitem)
+        self.file.Append(self.exitmenuitem)
         self.chronoframe_menubar.Append(self.file, _("File"))
         self.aboutmenu = wx.Menu()
         self.aboutmenuitem = wx.MenuItem(self.aboutmenu, wx.ID_ANY, _("About"), _("About Chronolapse"), wx.ITEM_NORMAL)
-        self.aboutmenu.AppendItem(self.aboutmenuitem)
+        self.aboutmenu.Append(self.aboutmenuitem)
         self.chronoframe_menubar.Append(self.aboutmenu, _("About"))
         self.SetMenuBar(self.chronoframe_menubar)
         # Menu Bar end
@@ -168,64 +168,64 @@ class chronoFrame(wx.Frame):
         self.SetTitle(_("ChronoLapse by Keeyai"))
         self.SetSize((511, 438))
         self.label_3.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, "MS Shell Dlg 2"))
-        self.screenshotcheck.SetToolTipString(_("Check this to capture screenshots"))
+        self.screenshotcheck.SetToolTip(_("Check this to capture screenshots"))
         self.screenshotcheck.SetValue(1)
-        self.screenshotconfigurebutton.SetToolTipString(_("Click to configure screenshot captures"))
-        self.webcamcheck.SetToolTipString(_("Check to enable webcam captures"))
+        self.screenshotconfigurebutton.SetToolTip(_("Click to configure screenshot captures"))
+        self.webcamcheck.SetToolTip(_("Check to enable webcam captures"))
         self.webcamcheck.SetValue(1)
-        self.configurewebcambutton.SetToolTipString(_("Click to configure camera captures"))
-        self.filename_format_timestamp.SetToolTipString(_("Saves screenshots and camera captures with the timestamp in the filename."))
+        self.configurewebcambutton.SetToolTip(_("Click to configure camera captures"))
+        self.filename_format_timestamp.SetToolTip(_("Saves screenshots and camera captures with the timestamp in the filename."))
         self.filename_format_timestamp.SetValue(1)
-        self.filename_format_sequential.SetToolTipString(_("Saves screenshots and camera captures as sequential numbers. Required by some external encoding libraries."))
-        self.frequencytext.SetToolTipString(_("The number of seconds in between captures. Set to 0 for no automatic capturing."))
-        self.ignoreidlecheck.SetToolTipString(_("Check this to skip capturing if no recent activity detected"))
-        self.startbutton.SetToolTipString(_("Click to start/stop capturing"))
-        self.forcecapturebutton.SetToolTipString(_("Click to force CL to capture right now. Use for important frames or for creating stop motions."))
+        self.filename_format_sequential.SetToolTip(_("Saves screenshots and camera captures as sequential numbers. Required by some external encoding libraries."))
+        self.frequencytext.SetToolTip(_("The number of seconds in between captures. Set to 0 for no automatic capturing."))
+        self.ignoreidlecheck.SetToolTip(_("Check this to skip capturing if no recent activity detected"))
+        self.startbutton.SetToolTip(_("Click to start/stop capturing"))
+        self.forcecapturebutton.SetToolTip(_("Click to force CL to capture right now. Use for important frames or for creating stop motions."))
         self.label_1.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, "MS Shell Dlg 2"))
         self.pipmainimagefoldertext.SetMinSize((200, -1))
         self.pipmainimagefolderbrowse.SetMinSize((25, -1))
-        self.pipmainimagefolderbrowse.SetToolTipString(_("Click to Browse"))
+        self.pipmainimagefolderbrowse.SetToolTip(_("Click to Browse"))
         self.pippipimagefoldertext.SetMinSize((200, -1))
         self.pippipimagefolderbrowse.SetMinSize((25, -1))
-        self.pippipimagefolderbrowse.SetToolTipString(_("Click to Browse"))
+        self.pippipimagefolderbrowse.SetToolTip(_("Click to Browse"))
         self.pipoutputimagefoldertext.SetMinSize((25, -1))
         self.pipoutputimagefolderbrowse.SetMinSize((25, -1))
-        self.pipoutputimagefolderbrowse.SetToolTipString(_("Click to Browse"))
-        self.pipsizecombo.SetToolTipString(_("Select the size of the smaller image"))
+        self.pipoutputimagefolderbrowse.SetToolTip(_("Click to Browse"))
+        self.pipsizecombo.SetToolTip(_("Select the size of the smaller image"))
         self.pipsizecombo.SetSelection(0)
-        self.pippositioncombo.SetToolTipString(_("Select the position of the smaller image"))
+        self.pippositioncombo.SetToolTip(_("Select the position of the smaller image"))
         self.pippositioncombo.SetSelection(1)
-        self.pipignoreunmatchedcheck.SetToolTipString(_("Check to ignore image names that are in one folder but not the other"))
+        self.pipignoreunmatchedcheck.SetToolTip(_("Check to ignore image names that are in one folder but not the other"))
         self.pipignoreunmatchedcheck.Hide()
         self.pipignoreunmatchedcheck.SetValue(1)
-        self.pipcreatebutton.SetToolTipString(_("Create PIP"))
+        self.pipcreatebutton.SetToolTip(_("Create PIP"))
         self.VideoLabel.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, "MS Shell Dlg 2"))
         self.videosourcetext.SetMinSize((200, -1))
         self.videosourcebrowse.SetMinSize((25, -1))
-        self.videosourcebrowse.SetToolTipString(_("Click to Browse"))
+        self.videosourcebrowse.SetToolTip(_("Click to Browse"))
         self.videodestinationtext.SetMinSize((200, -1))
         self.videodestinationbrowse.SetMinSize((25, -1))
-        self.videodestinationbrowse.SetToolTipString(_("Click to Browse"))
+        self.videodestinationbrowse.SetToolTip(_("Click to Browse"))
         self.mencoderpathtext.SetMinSize((200, -1))
-        self.mencoderpathtext.SetToolTipString(_("Set this to the MEncoder executable"))
+        self.mencoderpathtext.SetToolTip(_("Set this to the MEncoder executable"))
         self.mencoderpathbrowse.SetMinSize((25, -1))
-        self.mencoderpathbrowse.SetToolTipString(_("Click to Browse"))
-        self.videocodeccombo.SetToolTipString(_("Select which codec to use when encoding your video"))
+        self.mencoderpathbrowse.SetToolTip(_("Click to Browse"))
+        self.videocodeccombo.SetToolTip(_("Select which codec to use when encoding your video"))
         self.videocodeccombo.SetSelection(0)
         self.videoframeratetext.SetMinSize((25, -1))
-        self.videoframeratetext.SetToolTipString(_("Set how many images per second you want to show in your movie"))
-        self.videocreatebutton.SetToolTipString(_("Create the Video"))
+        self.videoframeratetext.SetToolTip(_("Set how many images per second you want to show in your movie"))
+        self.videocreatebutton.SetToolTip(_("Create the Video"))
         self.AudioLabel.SetFont(wx.Font(10, wx.DEFAULT, wx.NORMAL, wx.NORMAL, 0, "MS Shell Dlg 2"))
         self.audiosourcevideotext.SetMinSize((200, -1))
         self.audiosourcevideobrowse.SetMinSize((25, -1))
-        self.audiosourcevideobrowse.SetToolTipString(_("Click to Browse"))
+        self.audiosourcevideobrowse.SetToolTip(_("Click to Browse"))
         self.audiosourcetext.SetMinSize((200, -1))
         self.audiosourcebrowse.SetMinSize((25, -1))
-        self.audiosourcebrowse.SetToolTipString(_("Click to Browse"))
+        self.audiosourcebrowse.SetToolTip(_("Click to Browse"))
         self.audiooutputfoldertext.SetMinSize((200, -1))
-        self.audiooutputfoldertext.SetToolTipString(_("Set this to the folder where you want the finished video"))
+        self.audiooutputfoldertext.SetToolTip(_("Set this to the folder where you want the finished video"))
         self.audiooutputfolderbrowse.SetMinSize((25, -1))
-        self.audiooutputfolderbrowse.SetToolTipString(_("Click to Browse"))
+        self.audiooutputfolderbrowse.SetToolTip(_("Click to Browse"))
         # end wxGlade
 
     def __do_layout(self):
@@ -502,19 +502,19 @@ class screenshotConfigDialog(wx.Dialog):
     def __set_properties(self):
         # begin wxGlade: screenshotConfigDialog.__set_properties
         self.SetTitle(_("Configure Screenshots"))
-        self.dualmonitorscheck.SetToolTipString(_("Check to capture images from 2 monitors"))
-        self.timestampcheck.SetToolTipString(_("Check to have CL write a timestamp on each capture"))
+        self.dualmonitorscheck.SetToolTip(_("Check to capture images from 2 monitors"))
+        self.timestampcheck.SetToolTip(_("Check to have CL write a timestamp on each capture"))
         self.timestampcheck.SetValue(1)
         self.screenshot_timestamp_format.SetMinSize((150, -1))
-        self.screenshot_timestamp_format.SetToolTipString(_("The timestamp format. Passed directly to python's time.strftime function."))
-        self.subsectioncheck.SetToolTipString(_("Check to have CL write a timestamp on each capture"))
-        self.screenshotprefixtext.SetToolTipString(_("The file prefix every screenshot should start with"))
+        self.screenshot_timestamp_format.SetToolTip(_("The timestamp format. Passed directly to python's time.strftime function."))
+        self.subsectioncheck.SetToolTip(_("Check to have CL write a timestamp on each capture"))
+        self.screenshotprefixtext.SetToolTip(_("The file prefix every screenshot should start with"))
         self.screenshotsavefoldertext.SetMinSize((250, -1))
         self.screenshotsavefolderbrowse.SetMinSize((20, -1))
-        self.screenshotsavefolderbrowse.SetToolTipString(_("Click to browse directories"))
-        self.screenshotformatcombo.SetToolTipString(_("Select the file format in which screen captures will be saved"))
+        self.screenshotsavefolderbrowse.SetToolTip(_("Click to browse directories"))
+        self.screenshotformatcombo.SetToolTip(_("Select the file format in which screen captures will be saved"))
         self.screenshotformatcombo.SetSelection(0)
-        self.screenshotconfigsave.SetToolTipString(_("Save this configuration"))
+        self.screenshotconfigsave.SetToolTip(_("Save this configuration"))
         # end wxGlade
 
     def __do_layout(self):
@@ -599,15 +599,15 @@ class webcamConfigDialog(wx.Dialog):
     def __set_properties(self):
         # begin wxGlade: webcamConfigDialog.__set_properties
         self.SetTitle(_("Configure Webcam"))
-        self.testwebcambutton.SetToolTipString(_("Click to test your webcam"))
-        self.webcamtimestampcheck.SetToolTipString(_("Check to write a timestamp on each webcam capture"))
+        self.testwebcambutton.SetToolTip(_("Click to test your webcam"))
+        self.webcamtimestampcheck.SetToolTip(_("Check to write a timestamp on each webcam capture"))
         self.webcam_timestamp_format.SetMinSize((150, -1))
-        self.webcam_timestamp_format.SetToolTipString(_("The timestamp format. Passed directly to python's time.strftime function."))
+        self.webcam_timestamp_format.SetToolTip(_("The timestamp format. Passed directly to python's time.strftime function."))
         self.webcamsavefoldertext.SetMinSize((250, -1))
         self.webcamsavefolderbrowse.SetMinSize((20, -1))
-        self.webcamformatcombo.SetToolTipString(_("Select the file format in which webcam captures will be saved"))
+        self.webcamformatcombo.SetToolTip(_("Select the file format in which webcam captures will be saved"))
         self.webcamformatcombo.SetSelection(0)
-        self.webcamsavebutton.SetToolTipString(_("Save this configuration"))
+        self.webcamsavebutton.SetToolTip(_("Save this configuration"))
         # end wxGlade
 
     def __do_layout(self):
@@ -660,7 +660,7 @@ class webcamConfigDialog(wx.Dialog):
 class webcamPreviewDialog(wx.Dialog):
     def __init__(self, *args, **kwds):
         # begin wxGlade: webcamPreviewDialog.__init__
-        kwds["style"] = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER | wx.THICK_FRAME
+        kwds["style"] = wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER
         wx.Dialog.__init__(self, *args, **kwds)
         self.panel_1 = wx.ScrolledWindow(self, wx.ID_ANY, style=wx.TAB_TRAVERSAL)
         self.previewbitmap = wx.StaticBitmap(self.panel_1, wx.ID_ANY, wx.NullBitmap)

@@ -596,7 +596,7 @@ class ChronoFrame(chronoFrame):
         #Create a Bitmap that will later on hold the screenshot image
         #Note that the Bitmap must have a size big enough to hold the screenshot
         #-1 means using the current default colour depth
-        bmp = wx.EmptyBitmap(rect.width, rect.height)
+        bmp = wx.Bitmap(rect.width, rect.height)
 
         #Create a memory DC that will be used for actually taking the screenshot
         memDC = wx.MemoryDC()
@@ -669,7 +669,7 @@ class ChronoFrame(chronoFrame):
         device_number = self.getConfig('webcam_device_number')
 
         # turn on camera, capture, turn off
-        cam = cv2.VideoCapture(device_number)
+        cam = cv2.VideoCapture(device_number, cv2.CAP_DSHOW)
         # first read from opencv cam seems unreliable
         result, image = cam.read()
         result, image = cam.read()
@@ -1593,7 +1593,7 @@ Please add write permission and try again.""") % webcam_folder)
             wx.LaunchDefaultBrowser(path)
 
     def aboutMenuClicked(self, event):
-        info = wx.AboutDialogInfo()
+        info = wx.adv.AboutDialogInfo()
         info.Name = "Chronolapse"
         info.Version = self.VERSION
         info.Copyright = '(C) 2008-2016 Collin Green'
@@ -1609,7 +1609,7 @@ a front end to mencode to take your series of images and turn them into a movie.
         info.Developers = [ 'Collin "Keeyai" Green']
 
         # Then we call wx.AboutBox giving it that info object
-        wx.AboutBox(info)
+        wx.adv.AboutBox(info)
 
     def iconClose(self, event):
         logging.debug('Closing from taskbar')
@@ -1823,7 +1823,7 @@ class WebcamPreviewDialog(webcamPreviewDialog):
 
             # try this so WX doesnt freak out if the file isnt a bitmap
             pilimage = Image.open(path)
-            myWxImage = wx.EmptyImage( pilimage.size[0], pilimage.size[1] )
+            myWxImage = wx.Image( pilimage.size[0], pilimage.size[1] )
             myWxImage.SetData( pilimage.convert( 'RGB' ).tostring() )
             bitmap = myWxImage.ConvertToBitmap()
 
@@ -1856,7 +1856,7 @@ class ProgressPanel(wx.Panel):
     def setProgress(self, progress):
         self.progress = progress
 
-        dc = wx.WindowDC(self)
+        dc = wx.DC(self)
         dc.SetPen(wx.Pen(wx.Colour(0,0,255,255)))
         dc.SetBrush(wx.Brush(wx.Colour(0,0,255,220)))
 
@@ -1867,14 +1867,14 @@ class ProgressPanel(wx.Panel):
 
         # draw rect
         dc.Clear()
-        dc.DrawRoundedRectangleRect(rect, 2)
+        dc.DrawRoundedRectangle(rect, 2)
 
     def OnPaint(self, evt):
         # this doesnt appear to work at all...
         width,height = self.GetSizeTuple()
 
         # get drawing canvas
-        dc = wx.PaintDC(self)
+        dc = wx.DC(self)
 
         dc.SetPen(wx.Pen(wx.Colour(0,0,255,255)))
         dc.SetBrush(wx.Brush(wx.Colour(0,0,255,220)))
@@ -1886,7 +1886,7 @@ class ProgressPanel(wx.Panel):
         # draw rect
         dc.Clear()
         dc.BeginDrawing()
-        dc.DrawRoundedRectangleRect(rect, 2)
+        dc.DrawRoundedRectangle(rect, 2)
         dc.EndDrawing()
 
 
