@@ -8,12 +8,21 @@ Chronolapse 2.0 is a rewrite of the original Chronolapse codebase with generally
 
 Most significantly, Chronolapse 2.0 uses the OpenCV library to support webcam captures on all platforms.
 
+## Building
+Requirements (install with `pip`):
+* wxPython (`wxpython`)
+* OpenCV (`opencv-python`)
+
+The software can be run from the command line without building with `python chronolapse.py`, assuming the required packages are installed.
+
+To build a self-contained executable, use PyInstaller (`pyinstaller`): `pyinstaller -F chronolapse.py`
+
 ## Command Line Options
 
-- `-a / --autostart`
+- `-a` | `--autostart`
     Automatically starts capturing immediately
 
-- `-b / --background`
+- `-b` | `--background`
     Starts Chronolapse in the background without showing
     the frame at all. You can open the Chronolapse window
     from the taskbar on supported systems.
@@ -34,10 +43,10 @@ Most significantly, Chronolapse 2.0 uses the OpenCV library to support webcam ca
     using python's datetime.strftime function.
     Defaults to '`%Y-%m-%d %H:%M:%S`'
 
-- `-v / --verbose`
+- `-v` | `--verbose`
     Increases command line output
 
-- `-d / --debug`
+- `-d` | `--debug`
     Greatly increases command line output. Helpful for debugging.
 
 
